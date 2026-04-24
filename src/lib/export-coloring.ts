@@ -1,5 +1,4 @@
 import { toast } from "sonner";
-import jsPDF from "jspdf";
 import { buildRenderableSvg } from "@/components/coloring/coloring-canvas";
 import { MANUAL_PAGE_VIEWBOX } from "@/lib/coloring-framing";
 
@@ -243,6 +242,7 @@ export async function downloadColoringPdf(options: ExportColoringPdfOptions): Pr
 
   try {
     // A4 portrait in points (jsPDF default unit).
+    const { default: jsPDF } = await import("jspdf");
     const pdf = new jsPDF({ orientation: "portrait", unit: "pt", format: "a4" });
     const pageW = pdf.internal.pageSize.getWidth();
     const pageH = pdf.internal.pageSize.getHeight();
